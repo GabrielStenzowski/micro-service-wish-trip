@@ -1,0 +1,14 @@
+services:
+  databasemytravelmap:
+    image: mysql:8
+    container_name: mytravelmap-database
+    restart: always
+    environment:
+      MYSQL_DATABASE: db_my_travel_map
+      MYSQL_USER: 'docker'
+      MYSQL_PASSWORD: 'dockerdocker'
+      MYSQL_ROOT_PASSWORD: 'dockerdocker'
+    ports:
+      - '3306:3306' # Agora ambas as portas estão alinhadas
+    volumes:
+      - ./mysql-data:/var/lib/mysql

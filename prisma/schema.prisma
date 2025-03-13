@@ -1,0 +1,55 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+model User {
+  id            String      @id @default(uuid())
+  name          String
+  email         String      @unique
+  password_hash String
+  date_birth    DateTime
+  created_at    DateTime    @default(now())
+
+  userPlaces    UserPlace[]
+  places        Place[] 
+}
+
+model Place {
+  id         String        @id @default(uuid()) 
+  name       String
+  location   String
+  opinion    String?
+  userId     String        // Indica o usuário que adicionou o lugar
+  user       User          @relation(fields: [userId], references: [id]) // Relacionamento com o usuário
+  categories PlaceCategory[]
+  userPlaces UserPlace[]   // Relacionamento com os usuários que desejam visitar ou já visitaram o local
+}
+
+model UserPlace {
+  userId     String
+  placeId    String
+  visited    Boolean
+  active     Boolean  // Indica se o lugar é "ativo" para o usuário (se ele deseja ir lá ou já foi)
+  user       User     @relation(fields: [userId], references: [id])
+  place      Place    @relation(fields: [placeId], references: [id])
+
+  @@id([userId, placeId]) // Chave composta para garantir que a relação seja única
+}
+
+model Category {
+  id     String        @id @default(uuid())
+  name   String        @unique
+  places PlaceCategory[]
+}
+
+model PlaceCategory {
+  placeId    String
+  categoryId String
+  place      Place    @relation(fields: [placeId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
+  @@id([placeId, categoryId])
+}
