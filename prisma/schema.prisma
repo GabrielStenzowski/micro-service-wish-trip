@@ -18,16 +18,16 @@ model User {
   places        Place[] 
 }
 
-model Place {
-  id         String        @id @default(uuid()) 
-  name       String
-  location   String
-  opinion    String?
-  userId     String        // Indica o usuário que adicionou o lugar
-  user       User          @relation(fields: [userId], references: [id]) // Relacionamento com o usuário
-  categories PlaceCategory[]
-  userPlaces UserPlace[]   // Relacionamento com os usuários que desejam visitar ou já visitaram o local
-}
+  model Place {
+    id         String        @id @default(uuid()) 
+    name       String
+    location   String
+    opinion    String?
+    userId     String        // Indica o usuário que adicionou o lugar
+    user       User          @relation(fields: [userId], references: [id]) // Relacionamento com o usuário
+    categories PlaceCategory[]
+    userPlaces UserPlace[]   // Relacionamento com os usuários que desejam visitar ou já visitaram o local
+  }
 
 model UserPlace {
   userId     String
