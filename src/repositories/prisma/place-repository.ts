@@ -14,11 +14,7 @@ class PrismaPlaceRepository implements IPlaceRepository {
         location: data.location,
         opinion: data.opinion,
         user: { connect: { id: data.userId } },
-        categories: {
-          create: data.categories.map((categoryId) => ({
-            category: { connect: { id: categoryId } },
-          })),
-        },
+        category: { connect: { id: data.categoryId } },
         userPlaces: {
           create: data.userPlaces.map((userId) => ({
             user: { connect: { id: userId } },

@@ -1,15 +1,12 @@
 import { Place, UserPlace } from '@prisma/client'
-
 export interface CreatePlaceParams {
   name: string
   location: string
   opinion?: string
   userId: string
-  user: string
-  categories: string[]
+  categoryId: string
   userPlaces: string[]
 }
-
 export interface CreateUserPlaceParams {
   userId: string
   placeId: string

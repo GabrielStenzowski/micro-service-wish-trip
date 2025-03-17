@@ -18,16 +18,18 @@ model User {
   places        Place[] 
 }
 
-  model Place {
-    id         String        @id @default(uuid()) 
+model Place {
+    id         String    @id @default(uuid()) 
     name       String
     location   String
     opinion    String?
-    userId     String        // Indica o usuário que adicionou o lugar
-    user       User          @relation(fields: [userId], references: [id]) // Relacionamento com o usuário
-    categories PlaceCategory[]
-    userPlaces UserPlace[]   // Relacionamento com os usuários que desejam visitar ou já visitaram o local
-  }
+    userId     String      
+    user       User      @relation(fields: [userId], references: [id]) 
+    categoryId String
+    category   Category  @relation(fields: [categoryId], references: [id], name: "CategoryToPlace")
+    userPlaces UserPlace[]
+}
+
 
 model UserPlace {
   userId     String
@@ -41,15 +43,8 @@ model UserPlace {
 }
 
 model Category {
-  id     String        @id @default(uuid())
-  name   String        @unique
-  places PlaceCategory[]
+    id     String   @id @default(uuid())
+    name   String   @unique
+    places Place[] @relation("CategoryToPlace")
 }
 
-model PlaceCategory {
-  placeId    String
-  categoryId String
-  place      Place    @relation(fields: [placeId], references: [id])
-  category   Category @relation(fields: [categoryId], references: [id])
-  @@id([placeId, categoryId])
-}

@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { makeCreateUserPlaceUseCase } from '../../../use-cases/factories/create-user-place-use-case'
 import { z } from 'zod'
 
-class CreateUserPlaceRepository {
+class CreateUserPlaceController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const createUserPlaceUseCase = makeCreateUserPlaceUseCase()
 
@@ -20,10 +20,9 @@ class CreateUserPlaceRepository {
       await createUserPlaceUseCase.execute(data)
       reply.status(201).send({ message: 'User place created successfully' })
     } catch (err: any) {
-      
       return reply.status(500).send({ message: err.message })
     }
   }
 }
 
-export { CreateUserPlaceRepository }
+export { CreateUserPlaceController }

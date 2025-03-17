@@ -9,7 +9,6 @@ class CreateCategoryController {
 
     const createCategoryBodySchema = z.object({
       name: z.string(),
-      places: z.array(z.string()),
     })
 
     const data = createCategoryBodySchema.parse(request.body)
