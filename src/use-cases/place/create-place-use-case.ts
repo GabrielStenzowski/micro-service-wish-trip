@@ -2,8 +2,7 @@ import { IPlaceRepository } from '../../repositories/i-place-repository'
 interface CreatePlaceParams {
   name: string
   location: string
-  opinion?: string
-  userId: string
+  idea_userId: string
   categoryId: string
   userPlaces: string[]
 }
@@ -14,24 +13,21 @@ class CreatePlaceUseCase {
   async execute({
     name,
     location,
-    opinion,
-    userId,
+    idea_userId,
     categoryId,
     userPlaces,
   }: CreatePlaceParams) {
     console.log('Creating place:', {
       name,
       location,
-      opinion,
-      userId,
+      idea_userId,
       categoryId,
       userPlaces,
     })
     const placeCreated = await this.placeRepository.createPlace({
       name,
       location,
-      opinion,
-      userId,
+      idea_userId,
       categoryId,
       userPlaces,
     })

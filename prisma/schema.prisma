@@ -22,9 +22,8 @@ model Place {
     id         String    @id @default(uuid()) 
     name       String
     location   String
-    opinion    String?
-    userId     String      
-    user       User      @relation(fields: [userId], references: [id]) 
+    idea_userId     String     //Pessoa que cadastrou o lugar
+    user       User      @relation(fields: [idea_userId], references: [id]) 
     categoryId String
     category   Category  @relation(fields: [categoryId], references: [id], name: "CategoryToPlace")
     userPlaces UserPlace[]
@@ -35,6 +34,7 @@ model UserPlace {
   userId     String
   placeId    String
   visited    Boolean
+  opinion    String?
   active     Boolean  // Indica se o lugar é "ativo" para o usuário (se ele deseja ir lá ou já foi)
   user       User     @relation(fields: [userId], references: [id])
   place      Place    @relation(fields: [placeId], references: [id])

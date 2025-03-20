@@ -15,6 +15,12 @@ class PrismaCategoryRepository implements ICategoryRepository {
 
     return category
   }
+
+  async getCategories() {
+    const categories = await prisma.category.findMany()
+
+    return categories
+  }
 }
 
 export { PrismaCategoryRepository }

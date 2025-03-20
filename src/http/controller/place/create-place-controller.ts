@@ -9,8 +9,7 @@ class CreatePlaceController {
     const createPlaceBodySchema = z.object({
       name: z.string(),
       location: z.string(),
-      opinion: z.string().optional(),
-      userId: z.string(),
+      idea_userId: z.string(),
       categoryId: z.string(),
       userPlaces: z.array(z.string()),
     })

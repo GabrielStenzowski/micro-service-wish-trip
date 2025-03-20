@@ -10,6 +10,7 @@ class CreateUserPlaceController {
       userId: z.string(),
       placeId: z.string(),
       visited: z.boolean(),
+      opinion: z.string().optional(),
       active: z.boolean(),
       user: z.string(),
       place: z.string(),

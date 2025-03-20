@@ -6,6 +6,7 @@ interface createUserPlaceParams {
   placeId: string
   visited: boolean
   active: boolean
+  opinion?: string
   user: string
   place: string
 }
@@ -20,6 +21,7 @@ class CreateUserPlaceUseCase {
     placeId,
     visited,
     active,
+    opinion,
     user,
     place,
   }: createUserPlaceParams): Promise<UserPlace> {
@@ -27,6 +29,7 @@ class CreateUserPlaceUseCase {
       userId,
       placeId,
       visited,
+      opinion,
       active,
       user,
       place,
@@ -36,6 +39,7 @@ class CreateUserPlaceUseCase {
       userId,
       placeId,
       visited,
+      opinion,
       active,
       user,
       place,
