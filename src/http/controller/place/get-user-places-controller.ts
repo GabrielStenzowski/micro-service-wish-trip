@@ -4,11 +4,11 @@ import { z } from 'zod'
 
 class GetUserPlacesController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    console.log('Request Body: ', request.body)
     const getUserPlacesUseCase = makeGetUserPlacesUseCase()
 
     const getUserPlacesBodySchema = z.object({
       userId: z.string(),
+      active: z.boolean(),
     })
 
     const data = getUserPlacesBodySchema.parse(request.body)
