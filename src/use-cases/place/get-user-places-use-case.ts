@@ -2,6 +2,7 @@ import { IPlaceRepository } from '../../repositories/i-place-repository'
 
 interface getUserPlacesParams {
   userId: string
+  active: boolean
 }
 
 class GetUserPlacesUseCase {
@@ -9,10 +10,13 @@ class GetUserPlacesUseCase {
     this.placeRepository = placeRepository
   }
 
-  async execute({ userId }: getUserPlacesParams) {
-    console.log('Executing userPlaces', { userId })
+  async execute({ userId, active }: getUserPlacesParams) {
+    console.log('Executing userPlaces', { userId, active })
 
-    const userPlaces = await this.placeRepository.getUserPlaces({ userId })
+    const userPlaces = await this.placeRepository.getUserPlaces({
+      userId,
+      active,
+    })
 
     return userPlaces
   }

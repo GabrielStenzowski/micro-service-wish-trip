@@ -2,8 +2,10 @@ import { Place, UserPlace } from '@prisma/client'
 import {
   CreatePlaceParams,
   CreateUserPlaceParams,
+  GetUserPlaceByNameParams,
   GetUserPlaceParams,
   IPlaceRepository,
+  UpdateUserPlaceParams,
 } from '../i-place-repository'
 import { prisma } from '../../lib/prisma'
 
@@ -46,6 +48,7 @@ class PrismaPlaceRepository implements IPlaceRepository {
     const userPlace = await prisma.userPlace.findMany({
       where: {
         userId: data.userId,
+        active: data.active,
       },
       include: {
         place: true,
@@ -58,6 +61,23 @@ class PrismaPlaceRepository implements IPlaceRepository {
   async getPlaces() {
     const places = await prisma.place.findMany()
     return places
+  }
+
+  async updateUserPlace(data: UpdateUserPlaceParams): Promise<UserPlace> {
+    const userPlace = await prisma.userPlace.update({
+      data: {
+        visited: data.visited,
+        opinion: data.opinion,
+      },
+      where: {
+        userId_placeId: {
+          userId: data.userId,
+          placeId: data.placeId,
+        },
+      },
+    })
+
+    return userPlace
   }
 }
 

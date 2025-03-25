@@ -18,6 +18,20 @@ export interface CreateUserPlaceParams {
 
 export interface GetUserPlaceParams {
   userId: string
+  active?: boolean
+}
+
+export interface UpdateUserPlaceParams {
+  placeId: string
+  userId: string
+  visited?: boolean
+  opinion?: string
+}
+
+export interface GetUserPlaceByNameParams {
+  userId: string
+  placeId: string
+  name: string
 }
 
 interface IPlaceRepository {
@@ -27,6 +41,7 @@ interface IPlaceRepository {
     data: GetUserPlaceParams
   ): Promise<(UserPlace & { place: Place })[]>
   getPlaces(): Promise<Place[]>
+  updateUserPlace(data: UpdateUserPlaceParams): Promise<UserPlace>
 }
 
 export { IPlaceRepository }

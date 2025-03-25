@@ -6,6 +6,7 @@ import { createPlaceRoutes } from './routes/create-place.routes'
 import { getUserPlacesRoutes } from './routes/get-user-places.routes'
 import { getPlacesRoutes } from './routes/get-places.routes'
 import { getCategoriesRoutes } from './routes/get-categories.routes'
+import { updateUserPlaceRoutes } from './routes/update-user-place.routes'
 
 const app = fastify()
 // const app = fastify({ logger: true })
@@ -17,4 +18,5 @@ app.register(createPlaceRoutes)
 app.register(getUserPlacesRoutes)
 app.register(getPlacesRoutes)
 app.register(getCategoriesRoutes)
+app.register(updateUserPlaceRoutes)
 export { app }
